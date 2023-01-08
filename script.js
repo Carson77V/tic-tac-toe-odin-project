@@ -1,6 +1,6 @@
 //The module for the game board (tic tac toe)
 const gameBoard = (function () {
-    let _array = ["1","2","3","4","5","6","7","8","9"]
+    let _array = ["O","2","3","4","5","6","7","8","9"]
 
     // called to update the array when a new move is made
     const updateArray = function (sign, index) {
@@ -17,7 +17,7 @@ const gameBoard = (function () {
         }
     }
 
-    //temporary function to test if code is working
+    //return the array (function prevents modifications)
     const getArray = function() {
         return _array
     }
@@ -32,10 +32,21 @@ const gameController = (function () {
     //loop through the nodelist and give each boardSpot an event listener
     boardSpots.forEach(function(ele) {
         ele.addEventListener('click', () => {
-            //update the gameBoard
-            gameBoard.updateArray('X', ele.id);
+            //check if spot on the board is available
+            if (spotAvailable(gameBoard.getArray(), ele.id)) {
+                //update the gameBoard when a spot is clicked
+                gameBoard.updateArray('X', ele.id);
+            }
         })
     })
+
+    // return true if the spot hasn't been taken
+    const spotAvailable = function(array, i) {
+        if (array[i] != "X" && array[i] != "O") {
+            return true
+        }
+        return false
+    }
 
 
 })()
