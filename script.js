@@ -32,20 +32,16 @@ const gameController = (function () {
     //loop through the nodelist and give each boardSpot an event listener
     boardSpots.forEach(function(ele) {
         ele.addEventListener('click', () => {
-            //check if spot on the board is available
-            if (spotAvailable(gameBoard.getArray(), ele.id)) {
-                //update the gameBoard when a spot is clicked
-                gameBoard.updateArray('X', ele.id);
-            }
+            //check for availability and add player sign
+            spotAvailable(gameBoard.getArray(), ele.id, 'X')
         })
     })
 
-    // return true if the spot hasn't been taken
-    const spotAvailable = function(array, i) {
+    // if spot is available place players sign
+    const spotAvailable = function(array, i, sign) {
         if (array[i] != "X" && array[i] != "O") {
-            return true
+            gameBoard.updateArray(sign, i)
         }
-        return false
     }
 
 
