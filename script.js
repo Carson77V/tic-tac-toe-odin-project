@@ -29,8 +29,9 @@ const gameController = (function () {
     //loop through the nodelist and give each boardSpot an event listener
     boardSpots.forEach(function(ele) {
         ele.addEventListener('click', () => {
+            let sign = _playerTurn()
             //check for availability and add player sign
-            _spotAvailable(ele, gameBoard.getArray(), ele.id, 'X')
+            _spotAvailable(ele, gameBoard.getArray(), ele.id, sign)
         })
     })
 
@@ -43,11 +44,25 @@ const gameController = (function () {
         }
     }
 
+    //returns the sign of the player who's turn it is
+    const _playerTurn = function() {
+        
+    }
+
 })()
 
 //factory constructor that creates a player
 const Player = function (name, sign) {
     this.name = name
     this.sign = sign 
-    return {}
+
+    //returns the players sign
+    const getSign = function() {
+        return sign
+    }
+
+    return {getSign}
 }
+
+let player1 = Player('player1', 'X')
+let player2 = Player('player2', 'O')
