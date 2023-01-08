@@ -1,6 +1,6 @@
 //The module for the game board (tic tac toe)
 const gameBoard = (function () {
-    let _array = ["O","2","3","4","5","6","7","8","9"]
+    let _array = ["1","2","3","4","5","6","7","8","9"]
 
     // called to update the array when a new move is made
     const updateArray = function (sign, index) {
@@ -24,12 +24,12 @@ const gameBoard = (function () {
 
 //module will be used to check inputs like a controller
 const gameController = (function () {
+    let sign = 'X'
     //select each space from the table, creates a nodelist
     const boardSpots = document.querySelectorAll('td')
     //loop through the nodelist and give each boardSpot an event listener
     boardSpots.forEach(function(ele) {
         ele.addEventListener('click', () => {
-            let sign = _playerTurn()
             //check for availability and add player sign
             _spotAvailable(ele, gameBoard.getArray(), ele.id, sign)
         })
@@ -41,20 +41,25 @@ const gameController = (function () {
             gameBoard.updateArray(sign, i)
             //render the sign into the board spot
             ele.textContent = sign
+            //change turn after spot has been confirmed
+            _changeTurn()
         }
     }
 
     //returns the sign of the player who's turn it is
-    const _playerTurn = function() {
-        
+    const _changeTurn = function() {
+        if (sign === 'X') sign = 'O'
+        else sign = 'X'
     }
 
 })()
 
 //factory constructor that creates a player
-const Player = function (name, sign) {
+const Player = function (name, sign, turn) {
     this.name = name
-    this.sign = sign 
+    this.sign = sign
+    //true if it's this players turn
+    this.turn = turn
 
     //returns the players sign
     const getSign = function() {
@@ -64,5 +69,5 @@ const Player = function (name, sign) {
     return {getSign}
 }
 
-let player1 = Player('player1', 'X')
-let player2 = Player('player2', 'O')
+let player1 = Player('player1', 'X', true)
+let player2 = Player('player2', 'O', false)
