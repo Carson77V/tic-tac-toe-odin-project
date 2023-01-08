@@ -7,9 +7,6 @@ const gameBoard = (function () {
         _array[index] = sign
     }
 
-    const _renderBoard = function () {
-
-    }
     // called when board is to be reset
     const reset = function () {
         for (let i = 0; i < _array.length - 1; i++){
@@ -33,17 +30,18 @@ const gameController = (function () {
     boardSpots.forEach(function(ele) {
         ele.addEventListener('click', () => {
             //check for availability and add player sign
-            spotAvailable(gameBoard.getArray(), ele.id, 'X')
+            _spotAvailable(ele, gameBoard.getArray(), ele.id, 'X')
         })
     })
 
     // if spot is available place players sign
-    const spotAvailable = function(array, i, sign) {
+    const _spotAvailable = function(ele, array, i, sign) {
         if (array[i] != "X" && array[i] != "O") {
             gameBoard.updateArray(sign, i)
+            //render the sign into the board spot
+            ele.textContent = sign
         }
     }
-
 
 })()
 
