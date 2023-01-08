@@ -22,6 +22,14 @@ const gameBoard = (function () {
 
 //module will be used to check inputs like a controller
 const gameController = (function () {
+    //select each space from the table, creates a nodelist
+    const boardSpots = document.querySelectorAll('td')
+    //loop through the nodelist and give each boardSpot an event listener
+    boardSpots.forEach(function(ele) {
+        ele.addEventListener('click', () => {
+            
+        })
+    })
 
 })()
 
