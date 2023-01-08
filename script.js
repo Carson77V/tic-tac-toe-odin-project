@@ -17,7 +17,12 @@ const gameBoard = (function () {
         }
     }
 
-    return { reset, updateArray }
+    //temporary function to test if code is working
+    const getArray = function() {
+        return _array
+    }
+
+    return { reset, updateArray, getArray }
 })()
 
 //module will be used to check inputs like a controller
@@ -27,9 +32,11 @@ const gameController = (function () {
     //loop through the nodelist and give each boardSpot an event listener
     boardSpots.forEach(function(ele) {
         ele.addEventListener('click', () => {
-            
+            //update the gameBoard
+            gameBoard.updateArray('X', ele.id);
         })
     })
+
 
 })()
 
