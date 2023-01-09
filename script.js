@@ -22,6 +22,7 @@ const gameBoard = (function () {
     return { reset, updateArray, getArray }
 })()
 
+
 //module will be used to check inputs like a controller
 const gameController = (function () {
     let sign = 'X'
@@ -34,12 +35,24 @@ const gameController = (function () {
     startBtn.addEventListener('click', () => {
         const playerOneInput = document.querySelector('#player1')
         const playerTwoInput = document.querySelector('#player2')
+        const form = document.querySelector('form')
+        let inputsFilled = checkInput()
 
-        if (playerOneInput.value > '' && playerTwoInput.value > '') {
-            const player1 = Player(playerOneInput.textContent, 'X')
-            const player2 = Player(playerTwoInput.textContent, 'O')
 
+
+        if (inputsFilled) {
+            const player1 = Player(playerOneInput.value, 'X')
+            const player2 = Player(playerTwoInput.value, 'O')
+
+            form.insertBefore(createNameNode(player1.getName()), playerOneInput)
+            form.insertBefore(createNameNode(player2.getName()), playerTwoInput)
+
+            playerOneInput.remove()
+            playerTwoInput.remove()
             startGame()
+        }
+        else {
+            form.insertBefore(createWarning(), startBtn)
         }
     })
 
@@ -130,6 +143,32 @@ const gameController = (function () {
             match = 0
         }
     }
+    
+    //checks input is filled, return true if input if filled
+    const checkInput = function() {
+
+    }
+
+    //creates a node for player name
+    const createNameNode = function(playerName) {
+        const nameNode = document.createElement('h2')
+        nameNode.textContent = playerName
+        return nameNode
+    }
+
+    //creates a warning node
+    const createWarning = function() {
+        const warning = document.createElement('div');
+        warning.classList.add('warning');
+        warning.textContent = "Fill in the box!"
+        warning.style.cssText = "color: red; font-size: 0.75rem;";
+        return warning;
+    }
+
+    // removes warning label under input
+    const removeWarning = function(parent) {
+        parent.removeChild(parent.lastElementChild);
+    }
 
     //store all the patterns needed for a player to win in this function
     //use factory function to store array at bottom or code for organization
@@ -148,9 +187,21 @@ const gameController = (function () {
 
 })()
 
+
 //factory constructor that creates a player
-const Player = function (name, sign, turn) {
+const Player = function (name, sign) {
     this.name = name
     this.sign = sign
 
+    //assign a prototype 
+    let obj = Object.create(getPlayerName)
+    obj.name = name
+    return obj
+}
+
+//prototype of Player that gets the name
+const getPlayerName = {
+    getName() {
+        return this.name
+    }
 }
