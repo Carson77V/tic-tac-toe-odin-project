@@ -50,6 +50,7 @@ const gameController = (function () {
             playerOneInput.remove()
             playerTwoInput.remove()
             startGame()
+            startBtn.disabled = true
         }
         
     })
