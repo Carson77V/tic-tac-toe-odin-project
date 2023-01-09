@@ -7,3 +7,17 @@ td {
     width: 10rem;
     border: 1px solid black;
 }
+
+h1 {
+    text-align: center;
+}
+
+.controlButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.board {
+    display: flex;
+    justify-content: center;
+}
