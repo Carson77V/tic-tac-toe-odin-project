@@ -15,9 +15,16 @@ h1 {
 .board {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .playerNames {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playerNames > form {
     display: flex;
     flex-direction: column;
     align-items: center;

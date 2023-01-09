@@ -29,14 +29,30 @@ const gameController = (function () {
     //select each space from the table, creates a nodelist
     const boardSpots = document.querySelectorAll('td')
     const resetBtn = document.querySelector('#reset')
-    //loop through the nodelist and give each boardSpot an event listener
-    boardSpots.forEach(function(ele) {
-        ele.addEventListener('click', () => {
-            //check for availability and add player sign
-            _spotAvailable(ele, gameBoard.getArray(), ele.id, sign)
-            _checkWinner()
-        })
+    const startBtn = document.querySelector('#start')
+
+    startBtn.addEventListener('click', () => {
+        const playerOneInput = document.querySelector('#player1')
+        const playerTwoInput = document.querySelector('#player2')
+
+        if (playerOneInput.value > '' && playerTwoInput.value > '') {
+            const player1 = Player(playerOneInput.textContent, 'X')
+            const player2 = Player(playerTwoInput.textContent, 'O')
+
+            startGame()
+        }
     })
+
+    const startGame = function() {
+        //loop through the nodelist and give each boardSpot an event listener
+        boardSpots.forEach(function(ele) {
+            ele.addEventListener('click', () => {
+                //check for availability and add player sign
+                _spotAvailable(ele, gameBoard.getArray(), ele.id, sign)
+                _checkWinner()
+            })
+        })
+    }
 
     //reset button
     resetBtn.addEventListener('click', () => {
@@ -137,13 +153,4 @@ const Player = function (name, sign, turn) {
     this.name = name
     this.sign = sign
 
-    //returns the players sign
-    const getSign = function() {
-        return sign
-    }
-
-    return {getSign}
 }
-
-let player1 = Player('player1', 'X')
-let player2 = Player('player2', 'O')
