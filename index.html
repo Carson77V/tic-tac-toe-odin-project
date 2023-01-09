@@ -10,14 +10,14 @@
 </head>
 <body>
   <h1>Tic Tac Toe</h1>
-  <div class="controlButtons">
-    <button id="start">Start</button>
-    <button id="reset">Reset</button>
-  </div>
   <div class="board">
     <div class="playerNames">
-      <h2>Player X</h2>
-      <input type="text">
+      <h2>Player 1</h2>
+      <input type="text" id="player1" name="player1" required>
+      <h2>Player 2</h2>
+      <input type="text" id="player2" name="player2" required>
+      <button id="start">Start</button>
+      <button id="reset">Reset</button>
     </div>
     <table>
         <tr>
@@ -36,10 +36,6 @@
           <td id="8"></td>
         </tr>
     </table>
-    <div class="playerNames">
-      <h2>Player O</h2>
-      <input type="text">
-    </div>
   </div>
 </body>
 </html>
