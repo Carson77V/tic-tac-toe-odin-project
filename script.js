@@ -31,22 +31,24 @@ const gameController = (function () {
     const boardSpots = document.querySelectorAll('td')
     const resetBtn = document.querySelector('#reset')
     const startBtn = document.querySelector('#start')
+    let player1, player2
 
     startBtn.addEventListener('click', () => {
+        //select the two input boxes and the form to use as parent
         const playerOneInput = document.querySelector('#player1')
         const playerTwoInput = document.querySelector('#player2')
         const form = document.querySelector('form')
+        //determine if input have been fille
         let inputsFilled = checkInput(playerOneInput, playerTwoInput, form)
 
-
-
         if (inputsFilled) {
-            const player1 = Player(playerOneInput.value, 'X')
-            const player2 = Player(playerTwoInput.value, 'O')
-
+            //create new player objects
+            player1 = Player(playerOneInput.value, 'X')
+            player2 = Player(playerTwoInput.value, 'O')
+            //render the names of each player
             form.insertBefore(createNameNode(player1.getName()), playerOneInput)
             form.insertBefore(createNameNode(player2.getName()), playerTwoInput)
-
+            //remove the inputs
             playerOneInput.remove()
             playerTwoInput.remove()
             startGame()
@@ -107,15 +109,22 @@ const gameController = (function () {
     const _checkWinner = function() {
 
         if (_matchPatterns(xArray)) {
-            console.log('player1 wins')
+            addWinnerNode(player1.getName())
             xArray = []
             oArray= []
         }
         if (_matchPatterns(oArray)) {
-            console.log('player2 wins')
+            addWinnerNode(player2.getName())
             xArray = []
             oArray = []
         }
+    }
+
+    const addWinnerNode = function(name) {
+        const node = document.createElement('h2')
+        node.textContent = name
+        const title = document.querySelector('h1')
+        title.appendChild(node)
     }
 
     //function returns true if there is a winner 
