@@ -21,3 +21,9 @@ h1 {
     display: flex;
     justify-content: center;
 }
+
+.playerNames {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
