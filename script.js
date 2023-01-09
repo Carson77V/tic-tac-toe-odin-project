@@ -36,7 +36,7 @@ const gameController = (function () {
         const playerOneInput = document.querySelector('#player1')
         const playerTwoInput = document.querySelector('#player2')
         const form = document.querySelector('form')
-        let inputsFilled = checkInput()
+        let inputsFilled = checkInput(playerOneInput, playerTwoInput, form)
 
 
 
@@ -51,9 +51,7 @@ const gameController = (function () {
             playerTwoInput.remove()
             startGame()
         }
-        else {
-            form.insertBefore(createWarning(), startBtn)
-        }
+        
     })
 
     const startGame = function() {
@@ -145,8 +143,27 @@ const gameController = (function () {
     }
     
     //checks input is filled, return true if input if filled
-    const checkInput = function() {
-
+    const checkInput = function(inputOne, inputTwo, parent) {
+        const warning = document.querySelector('.warning')
+        
+        // remove the warning node because input is fille
+        if (warning && inputOne.value > '' && inputTwo.value > '') {
+            warning.remove()
+            return true
+        }
+        //return false if warning exists and input is empty
+        else if (warning && inputOne.value === '' && inputTwo.value === '') {
+            return false
+        }
+        // return true if input is empty and warning node does not exist
+        else if (!warning && inputOne.value > '' && inputTwo.value > '') {
+            return true
+        }
+        //add warning node because it does not exist and input is empty
+        else if (!warning && inputOne.value === '' && inputTwo.value === '') {
+            parent.insertBefore(createWarning(), startBtn)
+            return false
+        }
     }
 
     //creates a node for player name
@@ -160,14 +177,9 @@ const gameController = (function () {
     const createWarning = function() {
         const warning = document.createElement('div');
         warning.classList.add('warning');
-        warning.textContent = "Fill in the box!"
+        warning.textContent = "Fill in the boxes!"
         warning.style.cssText = "color: red; font-size: 0.75rem;";
         return warning;
-    }
-
-    // removes warning label under input
-    const removeWarning = function(parent) {
-        parent.removeChild(parent.lastElementChild);
     }
 
     //store all the patterns needed for a player to win in this function
