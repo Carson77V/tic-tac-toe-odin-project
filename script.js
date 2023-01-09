@@ -3,13 +3,13 @@ const gameBoard = (function () {
     let _array = ["","","","","","","","",""]
 
     // called to update the array when a new move is made
-    const updateArray = function (sign, index) {
+    const updateArray = function(sign, index) {
         _array[index] = sign
     }
 
     // called when board is to be reset
-    const reset = function () {
-        for (let i = 0; i < _array.length - 1; i++){
+    const reset = function() {
+        for (let i = 0; i < _array.length; i++){
             _array[i] = "";
         }
     }
@@ -28,6 +28,7 @@ const gameController = (function () {
     let xArray = [], oArray = []
     //select each space from the table, creates a nodelist
     const boardSpots = document.querySelectorAll('td')
+    const resetBtn = document.querySelector('#reset')
     //loop through the nodelist and give each boardSpot an event listener
     boardSpots.forEach(function(ele) {
         ele.addEventListener('click', () => {
@@ -36,6 +37,20 @@ const gameController = (function () {
             _checkWinner()
         })
     })
+
+    //reset button
+    resetBtn.addEventListener('click', () => {
+        //reset the gameboard array
+        gameBoard.reset()
+        //render the reset gameboard array
+        _render()
+    })
+
+    const _render = function() {
+        boardSpots.forEach(function(ele) {
+            ele.textContent = ''
+        })
+    }
 
     // if spot is available place players sign
     const _spotAvailable = function(ele, array, i, sign) {
@@ -62,21 +77,20 @@ const gameController = (function () {
 
     //checks the board for a winner
     const _checkWinner = function() {
-        // let xArray = [], oArray = []
-        // const array = gameBoard.getArray()
-        // //loop through the gameBoard array
-        // for (let i = 0; i < array.length - 1; i++) {
-        //     //saves all indexes of X and O to new arrays.
-        //     //used later to compare against winning patterns
-        //     if (array[i] === 'X') xArray.push(i)
-        //     else if (array[i] === 'O') oArray.push(i)
-        // }
 
-        if (_matchPatterns(xArray)) console.log('winner')
-        if (_matchPatterns(oArray)) console.log('winner')
-
+        if (_matchPatterns(xArray)) {
+            console.log('player1 wins')
+            xArray = []
+            oArray= []
+        }
+        if (_matchPatterns(oArray)) {
+            console.log('player2 wins')
+            xArray = []
+            oArray = []
+        }
     }
 
+    //function returns true if there is a winner 
     const _matchPatterns = function(array) {
         const winners = _winPatterns()
         //when match = 3, it has three matches and the player wins
@@ -101,7 +115,8 @@ const gameController = (function () {
         }
     }
 
-    //these are all the patterns of array indexes required to win
+    //store all the patterns needed for a player to win in this function
+    //use factory function to store array at bottom or code for organization
     const _winPatterns = function() {
         return [
             [0, 1, 2],
