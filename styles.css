@@ -1,11 +1,11 @@
 :root {
     --neon-green: #38f356;
-    --neon-blue: #2e92f0;
+    --neon-blue: #1599ff;
 }
 
 body {
     margin: 0;
-    background-color: #555157;
+    background-color: #403e41;
 }
 
 h1 {
@@ -22,6 +22,8 @@ h2 {
     font-family: 'Sofia Sans', sans-serif;
     font-weight: bold;
     font-size: 3rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 15px var(--neon-blue);
 }
 
 .board {
@@ -30,6 +32,23 @@ h2 {
     flex-wrap: wrap;
     font-family: 'Sofia Sans', sans-serif;
     font-weight: 500;
+}
+
+label {
+    color: var(--neon-green);
+    text-shadow: 0 0 15px var(--neon-green);
+    font-size: 1.2rem;
+    padding: 0.3rem 0.2rem;
+    margin: 0.1rem
+}
+
+input {
+    border-radius: 4px;
+    border: none;
+}
+
+input:focus {
+    outline: none;
 }
 
 .playerNames {
