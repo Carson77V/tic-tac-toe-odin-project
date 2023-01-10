@@ -24,6 +24,7 @@ h2 {
     font-size: 3rem;
     color: var(--neon-blue);
     text-shadow: 0 0 15px var(--neon-blue);
+    margin: 1rem;
 }
 
 .board {
@@ -43,8 +44,14 @@ label {
 }
 
 input {
+    margin-bottom: 1rem;
     border-radius: 4px;
     border: none;
+    font-family: 'Sofia Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--neon-green);
+    background: #1599ff44;
 }
 
 input:focus {
@@ -68,12 +75,17 @@ button {
     font-weight: 500;
     font-size: 1.5rem;
     padding: 0.4rem 1.4rem;
-    margin: 1rem;
+    margin: 0.8rem;
     color: var(--neon-green);
     background-color: var(--neon-blue);
     box-shadow: 0 0 15px var(--neon-green);
     border: none;
     border-radius: 4px;
+}
+
+button:hover {
+    background-color: var(--neon-green);
+    color: var(--neon-blue);
 }
 
 table {
