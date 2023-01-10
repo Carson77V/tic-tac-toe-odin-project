@@ -37,9 +37,15 @@ const gameController = (function () {
         //select the two input boxes and the form to use as parent
         const playerOneInput = document.querySelector('#player1')
         const playerTwoInput = document.querySelector('#player2')
+        const bot = document.querySelector('#bot')
         const form = document.querySelector('form')
-        //determine if input have been fille
+
+        //determine if input have been filled
         let inputsFilled = checkInput(playerOneInput, playerTwoInput, form)
+        //check if player is using bot
+        if (bot.checked) {
+            inputsFilled = checkInput(playerOneInput, "Bot", form)
+        }
 
         if (inputsFilled) {
             //create new player objects
@@ -171,6 +177,14 @@ const gameController = (function () {
         }
         //add warning node because it does not exist and input is empty
         else if (!warning && inputOne.value === '' && inputTwo.value === '') {
+            parent.insertBefore(createWarning(), startBtn)
+            return false
+        }
+        else if (!warning && inputOne.value === '' && inputTwo.value > '') {
+            parent.insertBefore(createWarning(), startBtn)
+            return false
+        }
+        else if (!warning && inputOne.value > '' && inputTwo.value === '') {
             parent.insertBefore(createWarning(), startBtn)
             return false
         }
