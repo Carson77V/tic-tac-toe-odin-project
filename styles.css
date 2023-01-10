@@ -1,23 +1,27 @@
-
-table {
-    border-collapse: collapse;
+:root {
+    --neon-green: #38f356;
+    --neon-blue: #2e92f0;
 }
 
-td {
-    height: 10rem;
-    width: 10rem;
-    border: 1px solid black;
+body {
+    margin: 0;
+    background-color: #555157;
 }
 
 h1 {
     text-align: center;
     font-family: 'Sofia Sans', sans-serif;
     font-weight: bold;
+    font-size: 5rem;
+    color: var(--neon-green);
+    margin: 0;
+    text-shadow: 0 0 15px var(--neon-green);
 }
 
 h2 {
     font-family: 'Sofia Sans', sans-serif;
     font-weight: bold;
+    font-size: 3rem;
 }
 
 .board {
@@ -45,10 +49,33 @@ button {
     font-weight: 500;
 }
 
+table {
+    border-collapse: collapse;
+}
+
 td {
     font-family: 'Lilita One', cursive;
     text-align: center;
     font-size: 7rem;
     color: blue;
+    height: 10rem;
+    width: 10rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 15px var(--neon-green);
 }
+
+#row1, #row2 {
+    border-bottom: 5px solid #4eaaffcc;
+}
+
+td {
+    border-right: 5px solid #4eaaffcc;
+}
+
+.last-column {
+    border: none;
+}
+
+
+
 
