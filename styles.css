@@ -47,6 +47,14 @@ h2 {
 button {
     font-family: 'Sofia Sans', sans-serif;
     font-weight: 500;
+    font-size: 1.5rem;
+    padding: 0.4rem 1.4rem;
+    margin: 1rem;
+    color: var(--neon-green);
+    background-color: var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-green);
+    border: none;
+    border-radius: 4px;
 }
 
 table {
