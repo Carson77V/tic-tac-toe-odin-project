@@ -15,10 +15,17 @@ h1 {
     font-weight: bold;
 }
 
+h2 {
+    font-family: 'Sofia Sans', sans-serif;
+    font-weight: bold;
+}
+
 .board {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    font-family: 'Sofia Sans', sans-serif;
+    font-weight: 500;
 }
 
 .playerNames {
@@ -31,4 +38,13 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+button {
+    font-family: 'Sofia Sans', sans-serif;
+    font-weight: 500;
+}
+
+table {
+    font-family: 'Lilita One', cursive;
 }
