@@ -45,6 +45,8 @@ button {
     font-weight: 500;
 }
 
-table {
+td {
     font-family: 'Lilita One', cursive;
+    text-align: center;
+    font-size: 7rem;
 }
