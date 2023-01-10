@@ -122,7 +122,7 @@ const gameController = (function () {
 
     const addWinnerNode = function(name) {
         const node = document.createElement('h2')
-        node.textContent = name
+        node.textContent = name + ' Wins!'
         const title = document.querySelector('h1')
         title.appendChild(node)
     }
