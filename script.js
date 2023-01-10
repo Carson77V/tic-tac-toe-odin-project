@@ -44,13 +44,16 @@ const gameController = (function () {
         let inputsFilled = checkInput(playerOneInput, playerTwoInput, form)
         //check if player is using bot
         if (bot.checked) {
-            inputsFilled = checkInput(playerOneInput, "Bot", form)
+            inputsFilled = checkInput(playerOneInput, bot, form)
         }
 
         if (inputsFilled) {
             //create new player objects
             player1 = Player(playerOneInput.value, 'X')
-            player2 = Player(playerTwoInput.value, 'O')
+            if (bot.checked) {
+                player2 = Player("Bot", 'O')
+            }
+            else player2 = Player(playerTwoInput.value, 'O')
             //render the names of each player
             form.insertBefore(createNameNode(player1.getName()), playerOneInput)
             form.insertBefore(createNameNode(player2.getName()), playerTwoInput)
