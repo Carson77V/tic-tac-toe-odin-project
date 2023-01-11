@@ -102,17 +102,22 @@ const gameController = (function () {
     resetBtn.addEventListener('click', () => {
         //reset the gameboard array
         gameBoard.reset()
+        //reset the x and o arrays
         xArray = []
         oArray = []
+        //revert the sign back to X
         sign = 'X'
+        removeWinnerNode()
         //render the reset gameboard array
         _render()
     })
 
     //render the board
     const _render = function() {
+        //make index for gameBoard array and get gameboard array
         let i = 0
         let board = gameBoard.getArray()
+        //go through all the board spots on the DOM
         boardSpots.forEach(function(ele) {
             ele.textContent = board[i]
             i++
@@ -164,6 +169,11 @@ const gameController = (function () {
         node.textContent = name + ' Wins!'
         const title = document.querySelector('h1')
         title.appendChild(node)
+    }
+
+    const removeWinnerNode = function() {
+        const title = document.querySelector('h1 > h2')
+        title.remove()
     }
 
     //function returns true if there is a winner 
