@@ -85,15 +85,15 @@ const gameController = (function () {
     //function places a random sing for the bot
     const botTurn = function(ele) {
         let spotAvailable = false
-        //generate a random number between 0 and 9
-        let random = Math.floor(Math.random() * 10);
+        //generate a random number between 0 and 8
+        let random = Math.floor(Math.random() * 9);
         //continue generating random numbers if computer can't 
         //find available space
         while (!spotAvailable) {
             console.log(random)
             //check for availability and add sign if available
             spotAvailable = _spotAvailable(ele, gameBoard.getArray(), random, sign)
-            random = Math.floor(Math.random() * 10);
+            random = Math.floor(Math.random() * 9);
         }
         _checkWinner()
     }
@@ -115,6 +115,7 @@ const gameController = (function () {
         let board = gameBoard.getArray()
         boardSpots.forEach(function(ele) {
             ele.textContent = board[i]
+            i++
         })
     }
 
@@ -123,7 +124,7 @@ const gameController = (function () {
         if (array[i] != "X" && array[i] != "O") {
             gameBoard.updateArray(sign, i)
             //render the sign into the board spot
-            ele.textContent = sign
+            _render()
             //change turn after spot has been confirmed
             _changeTurn(i)
             return true
