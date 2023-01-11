@@ -31,13 +31,13 @@ const gameController = (function () {
     const boardSpots = document.querySelectorAll('td')
     const resetBtn = document.querySelector('#reset')
     const startBtn = document.querySelector('#start')
+    const bot = document.querySelector('#bot')
     let player1, player2
 
     startBtn.addEventListener('click', () => {
         //select the two input boxes and the form to use as parent
         const playerOneInput = document.querySelector('#player1')
         const playerTwoInput = document.querySelector('#player2')
-        const bot = document.querySelector('#bot')
         const form = document.querySelector('form')
 
         //determine if input have been filled
@@ -50,6 +50,7 @@ const gameController = (function () {
         if (inputsFilled) {
             //create new player objects
             player1 = Player(playerOneInput.value, 'X')
+            //Change player2 name according to if a bot is the opponent
             if (bot.checked) {
                 player2 = Player("Bot", 'O')
             }
@@ -73,21 +74,47 @@ const gameController = (function () {
                 //check for availability and add player sign
                 _spotAvailable(ele, gameBoard.getArray(), ele.id, sign)
                 _checkWinner()
+                //If player is playing against a bot
+                if (bot.checked) {
+                    botTurn(ele);
+                }
             })
         })
+    }
+
+    //function places a random sing for the bot
+    const botTurn = function(ele) {
+        let spotAvailable = false
+        //generate a random number between 0 and 9
+        let random = Math.floor(Math.random() * 10);
+        //continue generating random numbers if computer can't 
+        //find available space
+        while (!spotAvailable) {
+            console.log(random)
+            //check for availability and add sign if available
+            spotAvailable = _spotAvailable(ele, gameBoard.getArray(), random, sign)
+            random = Math.floor(Math.random() * 10);
+        }
+        _checkWinner()
     }
 
     //reset button
     resetBtn.addEventListener('click', () => {
         //reset the gameboard array
         gameBoard.reset()
+        xArray = []
+        oArray = []
+        sign = 'X'
         //render the reset gameboard array
         _render()
     })
 
+    //render the board
     const _render = function() {
+        let i = 0
+        let board = gameBoard.getArray()
         boardSpots.forEach(function(ele) {
-            ele.textContent = ''
+            ele.textContent = board[i]
         })
     }
 
@@ -99,7 +126,9 @@ const gameController = (function () {
             ele.textContent = sign
             //change turn after spot has been confirmed
             _changeTurn(i)
+            return true
         }
+        return false
     }
 
     //returns the sign of the player who's turn it is
